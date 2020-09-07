@@ -1,0 +1,21 @@
+20
+pinfo 1647
+pinfo 0
+pinfo 2
+pinfo 2
+pinfo 3
+pinfo 1500
+pinfo 7777
+pinfo 0
+pinfo 1
+pinfo 4
+pinfo 562
+pinfo 5717
+pinfo 4088
+pinfo 5478
+pinfo 27
+pinfo 3286
+pwd
+pinfo
+pinfo 5799
+pinfo 5799
