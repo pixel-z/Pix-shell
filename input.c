@@ -26,9 +26,14 @@ char** filter_token(char *str)
 
 ll execute(char **com)
 {
+    ll len=0;
+    while(com[len]!=NULL)
+        len++;
+
     if (com[0]==NULL)
         return 0;
-    
+    else if (strcmp(com[len-1],"&")==0)
+        return REST(com,1);
     else if (strcmp(com[0],"echo")==0)
         return ECHO(com);
     else if (strcmp(com[0],"pwd")==0)
@@ -41,4 +46,6 @@ ll execute(char **com)
         return PINFO(com);
     else if (strcmp(com[0],"history")==0)
         return HISTORY(com);
+    else 
+        return REST(com,0);
 }
