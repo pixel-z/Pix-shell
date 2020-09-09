@@ -1,6 +1,12 @@
 #include "header.h"
 
-ll REST(char**com, ll bg)
+// Gives msg to user if background process is exited
+void handler(int signal)
+{
+    printf("\033[1;31m suspend\n");
+}
+
+ll BGFG(char**com, ll bg)
 {
     ll len=0;
 
@@ -14,28 +20,30 @@ ll REST(char**com, ll bg)
     }
 
     pid_t pid=fork();
-
     if (pid<0)
     {
-        perror("Error");
+        perror("Forking Error");
         exit(EXIT_FAILURE);
     }
-    if (pid==0)
+    else if (pid==0)
     {
         ll ret = execvp(com[0],com);
         if (ret<0)
         {
-            perror("Command not found");
+            perror("Command invalid");
             exit(EXIT_FAILURE);
         }
     }
 
-    if (bg==0)
+    else
     {
-        ll status;
-        pid_t wpid = waitpid(pid,&status,WUNTRACED);
-        
-    
+        if (bg==0)
+        {
+            ll status;
+            // pid_t wpid = waitpid(pid,&status,WUNTRACED);
+            
+
+        }
     }
 
 

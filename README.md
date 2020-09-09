@@ -1,14 +1,17 @@
 # Zishan Kazi (2019111031)
 
-## Instructions
+## Instructions 
 1. type `make`
-2. `./a.out`
+2. `./shell` to run
 
 ## Description
 
-shell.c is the main/master file.
-header.h consists of all headers.
-hostname is considered to be less than 1000 size
+1. header.h - consists of all headers.
+2. shell.c - the main/master file.
+3. prompt.c - consists prompt display 
 
-### prompt.c
-Function for prompt. E.g: <zk@zk-Swift-SF514-54T:~/> is prompt.
+4. nightswatch.c 
+    - Only `interrupt` has been implemented
+    - `interrupt` argument prints the number of times CPU has been interrupted by keyboard
+    - Executes every `n` seconds specified by user
+    - Press `q` to exit

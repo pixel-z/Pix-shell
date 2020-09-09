@@ -119,6 +119,7 @@ int main()
             execute(com);
         }
 
+        free(input_str);
         hist_exit();
     }
 
