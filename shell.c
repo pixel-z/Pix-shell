@@ -92,7 +92,6 @@ void prompt()
 
 int main()
 {
-    quit=0;
     bg_cnt=0;   // no active background processes
 
     for (ll i = 0; i < 1024; i++)

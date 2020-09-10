@@ -27,7 +27,6 @@ ll hist_cnt=0;
 ll bg_jobs[1024];
 char bg_jobs_name[1000][800];
 ll bg_cnt;
-ll quit;
 
 char **semicolon_tokenize();
 char *actual_path(char *rel_path);
