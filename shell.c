@@ -91,6 +91,11 @@ void prompt()
 
 int main()
 {
+    quit=0;
+    bg_cnt=0;   // no active background processes
+    for (ll i = 0; i < 1024; i++)
+        bg_jobs[i]=-1;
+
     printf("\n** Welcome to PiX shell **\n\n");
     getcwd(newroot,sizeof(newroot));
 
@@ -99,6 +104,16 @@ int main()
     {
         prompt();
         no_commands=0;
+
+        for (ll i = 0; i < 1024; i++)
+        {
+            if (bg_jobs[i]!=-1)
+            {
+                printf("")
+            }
+            
+        }
+        
 
         // getting input
         ssize_t len=0;

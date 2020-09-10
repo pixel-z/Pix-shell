@@ -9,6 +9,8 @@
 1. header.h - consists of all headers.
 2. shell.c - the main/master file.
 3. prompt.c - consists prompt display 
+4. rest.c 
+    - Background & Other Foreground processes are implemented
 
 4. history.c 
     - Similar to history in terminal

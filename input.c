@@ -34,8 +34,6 @@ ll execute(char **com)
 
     if (com[0]==NULL)
         return 0;
-    else if (strcmp(com[len-1],"&")==0)
-        return REST(com,1);
     else if (strcmp(com[0],"nightswatch")==0)
         return NIGHTSWATCH(com);
     else if (strcmp(com[0],"echo")==0)
@@ -51,5 +49,5 @@ ll execute(char **com)
     else if (strcmp(com[0],"history")==0)
         return HISTORY(com);
     else 
-        return REST(com,0);
+        return REST(com);
 }

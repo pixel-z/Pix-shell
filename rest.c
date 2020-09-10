@@ -1,14 +1,57 @@
 #include "header.h"
 
-// Gives msg to user if background process is exited
-void handler(int signal)
+pid_t foreground_pid;
+ll flag=0;
+
+// we could not do it normally as execvp skips the below code therefore we need to fork 
+// Therefore child executes the command and parent(prompt) waits for its completion
+void foreground(char **com)
 {
-    printf("\033[1;31m suspend\n");
+    pid_t pid = fork();
+    if (pid < -1)
+    {
+        perror("Forking Error");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid==0)
+    {
+        // Changing group id of child from parent to make both of them run in foregrnd
+        if (execvp(com[0], com) < 0)
+        {
+            perror("Command invalid");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else
+    {
+        int status;
+        waitpid(pid, &status, WUNTRACED);
+    }
 }
 
-ll REST(char**com, ll bg)
+void background(char **com)
 {
-    ll len=0;
+    pid_t pid = fork();
+    bg_jobs[bg_cnt++] = pid;
+    setpgid(0, 0);
+    if (pid < -1)
+    {
+        perror("Forking Error");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid==0)
+    {
+        if (execvp(com[0], com) < 0)
+        {
+            perror("Command invalid");
+            exit(EXIT_FAILURE);
+        }
+    }
+}
+
+ll REST(char**com)
+{
+    ll len=0,bg=0;
 
     while (com[len]!=NULL)
         len++;
@@ -16,35 +59,11 @@ ll REST(char**com, ll bg)
     {
         bg=1;
         com[len-1]=NULL;
-        len--;
     }
 
-    pid_t pid=fork();
-    if (pid<0)
-    {
-        perror("Forking Error");
-        exit(EXIT_FAILURE);
-    }
-    else if (pid==0)
-    {
-        ll ret = execvp(com[0],com);
-        if (ret<0)
-        {
-            perror("Command invalid");
-            exit(EXIT_FAILURE);
-        }
-    }
-
+    // no background process
+    if (bg==0)
+        foreground(com);
     else
-    {
-        if (bg==0)
-        {
-            ll status;
-            // pid_t wpid = waitpid(pid,&status,WUNTRACED);
-            
-
-        }
-    }
-
-
+        background(com);
 }

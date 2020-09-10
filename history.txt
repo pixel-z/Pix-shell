@@ -1,6 +1,16 @@
-5
-nightswatch -n 1 interrupt
-nightswatch -n 1 interrupt
-nightswatch -n 3 interrupt
-nightswatch -n 2 interrupt
-qw
+15
+a
+a
+vi
+vi &
+ps
+quit
+vi &
+vi
+exit
+quit
+quit
+vi &
+ps
+quit
+vi & 
