@@ -2,27 +2,27 @@
 
 void EXIT_STAT()
 {
-    int status;
-    ll check = waitpid(-1,&status,WNOHANG);
-    if (check >0)
+    int stat;
+    pid_t pid = waitpid(-1,&stat,WNOHANG);
+    if (pid >0 && WIFEXITED(stat)==0)
     {
-        if (WIFEXITED(status)==0)
+        for (ll i = 0; i < 1000; i++)
         {
-            for (ll i = 0; i < 1000; i++)
+            if (bg_jobs[i]==pid)
             {
-                if (bg_jobs[i]==check)
-                    bg_jobs[i]=-1;
+                fprintf(stderr,"Process with pid %lld exited with exit status: %d\n",bg_jobs[i],WEXITSTATUS(stat));
+                bg_jobs[i]=-1;
             }
-            printf("Process with pid %lld exited with status: %d\n",check,WEXITSTATUS(status));
         }
     }
 
     for (ll i = 0; i < 1000; i++)
     {
-        if (kill(bg_jobs[i],0)==-1)
+        ll ret = kill(bg_jobs[i],0);
+        if (ret == -1)
         {
-            printf("%s with pid %lld exited successfully\n",bg_jobs_name[i],bg_jobs[i]);
-            printf("%s\n",bg_jobs_name[i]);
+            fprintf(stderr,"Process with pid %lld exited normally\n",bg_jobs[i]);
+            bg_jobs[i]=-1;
         }
     }
 }

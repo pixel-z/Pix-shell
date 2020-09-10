@@ -56,4 +56,6 @@
     - Only `interrupt` has been implemented
     - Pressing `q` doesn't directly exit the program, we need to press `q+enter`. 
 2. Many char arrays store 1024 or 2048 characters in it. Its assumed that it will not overflow.
-3. No. of background processes should be less than 1000
+3. No. of background processes should be less than 1000.
+4. Running background processes and then exiting thorough `Ctrl+C` will give error (Ctrl+C handling is not implemented).
+5. Process exit status (E.g: process exited normally) is printed after next prompt.
