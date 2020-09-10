@@ -17,6 +17,7 @@
 #include <inttypes.h>
 #include <math.h>
 #include <signal.h>
+#include <sys/select.h>
 
 typedef long long ll;
 char newroot[1024];

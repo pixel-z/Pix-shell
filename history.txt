@@ -1,0 +1,6 @@
+5
+nightswatch -n 1 interrupt
+nightswatch -n 1 interrupt
+nightswatch -n 3 interrupt
+nightswatch -n 2 interrupt
+qw

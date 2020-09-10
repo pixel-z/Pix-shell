@@ -6,7 +6,7 @@ void handler(int signal)
     printf("\033[1;31m suspend\n");
 }
 
-ll BGFG(char**com, ll bg)
+ll REST(char**com, ll bg)
 {
     ll len=0;
 
