@@ -1,16 +1,0 @@
-15
-a
-a
-vi
-vi &
-ps
-quit
-vi &
-vi
-exit
-quit
-quit
-vi &
-ps
-quit
-vi & 

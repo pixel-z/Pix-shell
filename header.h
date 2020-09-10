@@ -25,7 +25,7 @@ ll no_commands=0; // no of commands divided by ';'
 char hist[22][1024]; // it starts from hist[1]
 ll hist_cnt=0;
 ll bg_jobs[1024];
-char bg_jobs_name[1024][800];
+char bg_jobs_name[1000][800];
 ll bg_cnt;
 ll quit;
 
@@ -34,6 +34,5 @@ char *actual_path(char *rel_path);
 char *relative_path(char *check);
 void prompt();
 char **filter_token(char *str);
-void handler(int signal);
 
 #endif

@@ -1,5 +1,6 @@
 #include "header.h"
 #include "input.c"
+#include "exit_stat.c"
 
 char **semicolon_tokenize(char *input_str,ll len)
 {
@@ -93,6 +94,7 @@ int main()
 {
     quit=0;
     bg_cnt=0;   // no active background processes
+
     for (ll i = 0; i < 1024; i++)
         bg_jobs[i]=-1;
 
@@ -102,18 +104,9 @@ int main()
     load_hist();
     while (1)
     {
+        EXIT_STAT();
         prompt();
         no_commands=0;
-
-        for (ll i = 0; i < 1024; i++)
-        {
-            if (bg_jobs[i]!=-1)
-            {
-                printf("")
-            }
-            
-        }
-        
 
         // getting input
         ssize_t len=0;
@@ -138,5 +131,6 @@ int main()
         hist_exit();
     }
 
+    free(bg_jobs_name);
     return 0;
 }

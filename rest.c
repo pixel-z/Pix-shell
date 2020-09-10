@@ -29,10 +29,22 @@ void foreground(char **com)
     }
 }
 
-void background(char **com)
+void background(char **com, ll len)
 {
     pid_t pid = fork();
-    bg_jobs[bg_cnt++] = pid;
+    
+    //****
+    bg_jobs[bg_cnt] = pid;
+    char temp[1024];
+    for (ll i = 0; i < len; i++)
+    {
+        strcat(temp, com[i]);
+        strcat(temp, " ");
+    }
+    strcpy(bg_jobs_name[bg_cnt],temp);
+    bg_cnt++;
+    //*****
+
     setpgid(0, 0);
     if (pid < -1)
     {
@@ -59,11 +71,12 @@ ll REST(char**com)
     {
         bg=1;
         com[len-1]=NULL;
+        len--;
     }
 
     // no background process
     if (bg==0)
         foreground(com);
     else
-        background(com);
+        background(com,len);
 }
