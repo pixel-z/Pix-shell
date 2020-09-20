@@ -41,7 +41,6 @@ void background(char **com, ll len)
         strcat(temp, com[i]);
         strcat(temp, " ");
     }
-    strcpy(bg_jobs_name[bg_cnt],temp);
     bg_cnt++;
     //*****
 

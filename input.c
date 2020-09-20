@@ -7,6 +7,8 @@
 #include "pinfo.c"
 #include "rest.c"
 #include "nightswatch.c"
+#include "jobs.c"
+#include "overkill.c"
 
 // each command (command[i]/token) is tokenized with delim ' ' or '\n' or '\t'
 char** filter_token(char *str)
@@ -34,6 +36,10 @@ ll execute(char **com)
 
     if (com[0]==NULL)
         return 0;
+    else if (strcmp(com[0],"overkill")==0)
+        return OVERKILL();
+    else if (strcmp(com[0], "jobs")==0)
+        return JOBS(com);
     else if (strcmp(com[0],"nightswatch")==0)
         return NIGHTSWATCH(com);
     else if (strcmp(com[0],"echo")==0)

@@ -130,6 +130,5 @@ int main()
         hist_exit();
     }
 
-    free(bg_jobs_name);
     return 0;
 }
