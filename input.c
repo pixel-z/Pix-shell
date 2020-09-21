@@ -9,6 +9,7 @@
 #include "nightswatch.c"
 #include "jobs.c"
 #include "overkill.c"
+#include "kjob.c"
 
 // each command (command[i]/token) is tokenized with delim ' ' or '\n' or '\t'
 char** filter_token(char *str)
@@ -30,12 +31,10 @@ char** filter_token(char *str)
 
 ll execute(char **com)
 {
-    ll len=0;
-    while(com[len]!=NULL)
-        len++;
-
     if (com[0]==NULL)
         return 0;
+    else if (strcmp(com[0],"kjob")==0)
+        return KJOB(com);
     else if (strcmp(com[0],"overkill")==0)
         return OVERKILL();
     else if (strcmp(com[0], "jobs")==0)
