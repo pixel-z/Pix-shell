@@ -37,8 +37,15 @@ ll execute(char **com)
         return KJOB(com);
     else if (strcmp(com[0],"overkill")==0)
         return OVERKILL();
-    else if (strcmp(com[0], "jobs")==0)
+    else if (strcmp(com[0],"jobs")==0)
         return JOBS(com);
+    else if (strcmp(com[0],"quit")==0 || strcmp(com[0],"exit")==0)
+    {
+        hist_exit();   
+        OVERKILL();
+        printf("\n\033[1;33mC U Later :D\033[0m\n");
+        exit(0);
+    }
     else if (strcmp(com[0],"nightswatch")==0)
         return NIGHTSWATCH(com);
     else if (strcmp(com[0],"echo")==0)

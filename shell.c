@@ -78,7 +78,6 @@ char *relative_path(char *check)
 
 void prompt()
 {
-    // getenv() searches for the environment variable with given string and returns pointer
     char *username=getenv("USER");
     char hostname[1201];
     gethostname(hostname,sizeof(hostname));
@@ -97,8 +96,10 @@ int main()
     for (ll i = 0; i < 1024; i++)
         bg_jobs[i]=-1;
 
-    printf("\n** Welcome to PiX shell **\n\n");
+    printf("\n**\033[1;33m Welcome to PiX shell \033[0m**\n\n");
     getcwd(newroot,sizeof(newroot));
+
+    strcpy(lwd,"~");
 
     load_hist();
     while (1)

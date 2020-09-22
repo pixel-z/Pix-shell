@@ -2,27 +2,27 @@
 
 ll CD(char **com)
 {
-    char *path = malloc(1024 * sizeof(char));
+    char cwd[1024];
+    getcwd(cwd,sizeof(cwd));
 
-    if (com[1][0] == '~')
+    if (strcmp(com[1],"-") == 0)
     {
-        path = newroot;
-        ll n = strlen(newroot), m=strlen(com[1]);
-        for (ll i = 1; i < m; i++)
-            path[n++] = com[1][i];
-
-        path[n] = '\0';
-    }
-    else
-    {
-        path = com[1];
-        path[strlen(com[1])]='\0';
+        printf("%s\n",lwd);
+        
+        if(chdir(actual_path(lwd))==-1)
+            perror("lwd error");
+        strcpy(lwd,relative_path(cwd));
+        return 0;
     }
 
+    char *path = actual_path(com[1]);
     if (chdir(path) == -1)
     {
         perror("CD error");
+        return -1;
     }
+
+    strcpy(lwd,relative_path(cwd));
 
     return 0;
 }

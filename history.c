@@ -97,7 +97,7 @@ ll HISTORY(char **com)
 
 void hist_exit()
 {
-    FILE *fp = fopen("history.txt","w");
+    FILE *fp = fopen(actual_path("~/history.txt"),"w");
 
     fprintf(fp,"%lld\n",hist_cnt);
     for (ll i = 1; i <= hist_cnt; i++)
