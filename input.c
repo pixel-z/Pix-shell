@@ -10,6 +10,7 @@
 #include "jobs.c"
 #include "overkill.c"
 #include "kjob.c"
+#include "env.c"
 
 // each command (command[i]/token) is tokenized with delim ' ' or '\n' or '\t'
 char** filter_token(char *str)
@@ -33,6 +34,10 @@ ll execute(char **com)
 {
     if (com[0]==NULL)
         return 0;
+    else if (strcmp(com[0],"setenv")==0)
+        return SENV(com);
+    else if (strcmp(com[0],"unsetenv")==0)
+        return UNSENV(com);
     else if (strcmp(com[0],"kjob")==0)
         return KJOB(com);
     else if (strcmp(com[0],"overkill")==0)
