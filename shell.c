@@ -2,11 +2,11 @@
 #include "input.c"
 #include "exit_stat.c"
 
-char **semicolon_tokenize(char *input_str,ll len)
+char **semicolon_tokenize(char *input_str)
 {
     char **tokens;
     char *command;
-    tokens=malloc(len*sizeof(char *));
+    tokens=malloc(1024*sizeof(char *));
     command=strtok(input_str,";");
 
     while (command!=NULL)
@@ -109,15 +109,23 @@ int main()
         no_commands=0;
 
         // getting input
-        ssize_t len=0;
-        char *input_str=NULL;
-        getline(&input_str,&len,stdin);
+        char input_str[1024];
+        char *ret = fgets(input_str,sizeof(input_str),stdin);
+
+        // ret=NULL means end of file (Ctrl+D) = quit
+        if (ret == NULL)
+        {
+            hist_exit();   
+            OVERKILL();
+            printf("\n\033[1;33mC U Later :D\033[0m\n");
+            exit(0);
+        }
 
         // adding command to history if applicable
-        history_add(input_str,len); 
+        history_add(input_str); 
 
         // getting input & tokenize using ';' delim
-        char **commands= semicolon_tokenize(input_str,len);
+        char **commands= semicolon_tokenize(input_str);
 
         // included in input.c
         for (ll i = 0; i < no_commands; i++)
@@ -127,7 +135,6 @@ int main()
             execute(com);
         }
 
-        free(input_str);
         hist_exit();
     }
 

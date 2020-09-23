@@ -2,6 +2,12 @@
 
 ll CD(char **com)
 {
+    if (com[1]== NULL)
+    {
+        fprintf(stderr,"No argument\n");
+        return -1;
+    }
+    
     char cwd[1024];
     getcwd(cwd,sizeof(cwd));
 

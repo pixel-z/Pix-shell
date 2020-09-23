@@ -34,7 +34,7 @@ void load_hist()
 }
 
 // changing hist[] whenever a input is written
-void history_add(char *input_str, ll len)
+void history_add(char *input_str)
 {
     if (strcmp(input_str,"\n") == 0 || strcmp(input_str,"\t")==0 || strcmp(input_str,"\0")==0)
         return;
