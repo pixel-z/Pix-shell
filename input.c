@@ -11,6 +11,8 @@
 #include "overkill.c"
 #include "kjob.c"
 #include "env.c"
+#include "redirection.c"
+#include "piping.c"
 
 // each command (command[i]/token) is tokenized with delim ' ' or '\n' or '\t'
 char** filter_token(char *str)
@@ -32,8 +34,23 @@ char** filter_token(char *str)
 
 ll execute(char **com)
 {
+    ll len = 0, redirect=0, pipe=0;
+    while (com[len]!=NULL)
+    {
+        if (strcmp(com[len],">")==0 || strcmp(com[len],"<")==0 || strcmp(com[len],">>")==0)
+            redirect=1;
+        if (strcmp(com[len],"|")==0)
+            pipe=1;
+        len++;
+    }
+
     if (com[0]==NULL)
         return 0;
+    else if (pipe==1)
+        return PIPING(com);
+    else if (redirect==1)
+        return REDIRECT(com);
+        
     else if (strcmp(com[0],"setenv")==0)
         return SENV(com);
     else if (strcmp(com[0],"unsetenv")==0)

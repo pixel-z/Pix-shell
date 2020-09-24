@@ -8,7 +8,7 @@ ll flag=0;
 void foreground(char **com)
 {
     pid_t pid = fork();
-    if (pid < -1)
+    if (pid < 0)
     {
         perror("Forking Error");
         exit(EXIT_FAILURE);
@@ -24,6 +24,7 @@ void foreground(char **com)
     }
     else
     {
+        fore_pid = pid;
         int status;
         waitpid(pid, &status, WUNTRACED);
     }

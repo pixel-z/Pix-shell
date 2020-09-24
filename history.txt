@@ -1,0 +1,21 @@
+20
+jobs
+ps
+ps -a
+ps -aux
+c < a
+cd < ..
+ls -l < 2.txt
+cat < 1.txt >> > 2.txt
+cat 2.txt
+cat 1.txt >> 2.txt
+cat 2.txt
+sort < cat < 1.txt > 2.txt
+cat 2.txt
+sort < < < < < < < < < < < 1.txt
+sort < < < 1.txt >> >> >> 2.txt
+cat 2.txt
+clear < 2.txt
+cat 2.txt
+rm 2.txt
+rm 1.txt

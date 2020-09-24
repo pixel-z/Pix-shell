@@ -1,6 +1,7 @@
 #include "header.h"
 #include "input.c"
 #include "exit_stat.c"
+#include "ctrlcz.c"
 
 char **semicolon_tokenize(char *input_str)
 {
@@ -104,7 +105,9 @@ int main()
     load_hist();
     while (1)
     {
-        EXIT_STAT();
+        signal(SIGCHLD,EXIT_STAT);
+        signal(SIGTSTP, CTRLZ);
+        signal(SIGINT, CTRLC);
         prompt();
         no_commands=0;
 

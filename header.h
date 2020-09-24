@@ -27,6 +27,7 @@ ll hist_cnt=0;
 ll bg_jobs[1024]; //list of background jobs pid (-1 when bg terminated)
 ll bg_cnt;
 char lwd[1024]; //last working directory
+ll fore_pid;
 
 char **semicolon_tokenize();
 char *actual_path(char *rel_path);
