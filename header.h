@@ -34,5 +34,6 @@ char *actual_path(char *rel_path);
 char *relative_path(char *check);
 void prompt();
 char **filter_token(char *str);
+void CTRLZ(int sig);
 
 #endif

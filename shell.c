@@ -106,7 +106,7 @@ int main()
     while (1)
     {
         signal(SIGCHLD,EXIT_STAT);
-        signal(SIGTSTP, CTRLZ);
+        signal(SIGTSTP, CTRLZ0);
         signal(SIGINT, CTRLC);
         prompt();
         no_commands=0;

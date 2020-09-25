@@ -25,6 +25,7 @@ void foreground(char **com)
     else
     {
         fore_pid = pid;
+        signal(SIGTSTP,CTRLZ);
         int status;
         waitpid(pid, &status, WUNTRACED);
     }
