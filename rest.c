@@ -15,7 +15,6 @@ void foreground(char **com)
     }
     else if (pid==0)
     {
-        // Changing group id of child from parent to make both of them run in foregrnd
         if (execvp(com[0], com) < 0)
         {
             perror("Command invalid");
@@ -46,6 +45,7 @@ void background(char **com, ll len)
     bg_cnt++;
     //*****
 
+    // Changing group id of child from parent to make both of them run in foregrnd
     setpgid(0, 0);
     if (pid < -1)
     {

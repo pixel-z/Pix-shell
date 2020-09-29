@@ -133,9 +133,11 @@ int main()
         // included in input.c
         for (ll i = 0; i < no_commands; i++)
         {
-            char **com;
+            char **com, *tmp;
+            strcpy(tmp,commands[i]);
+            
             com=filter_token(commands[i]);
-            execute(com);
+            execute(com,tmp);
         }
 
         hist_exit();

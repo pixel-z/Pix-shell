@@ -18,7 +18,7 @@ void EXIT_STAT()
 
     for (ll i = 0; i < 1000; i++)
     {
-        ll ret = kill(bg_jobs[i],0);
+        ll ret = kill(bg_jobs[i],0); // this can be used to check for the existence of a process ID
         if (ret == -1)
         {
             fprintf(stderr,"Process with pid %lld exited normally\n",bg_jobs[i]);

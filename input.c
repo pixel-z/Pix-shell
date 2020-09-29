@@ -13,6 +13,7 @@
 #include "env.c"
 #include "redirection.c"
 #include "piping.c"
+#include "fgbg.c"
 
 // each command (command[i]/token) is tokenized with delim ' ' or '\n' or '\t'
 char** filter_token(char *str)
@@ -32,7 +33,7 @@ char** filter_token(char *str)
     return output;
 }
 
-ll execute(char **com)
+ll execute(char **com, char *input_str)
 {
     ll len = 0, redirect=0, pipe=0;
     while (com[len]!=NULL)
@@ -47,10 +48,13 @@ ll execute(char **com)
     if (com[0]==NULL)
         return 0;
     else if (pipe==1)
-        return PIPING(com);
+        return PIPING(input_str);
     else if (redirect==1)
         return REDIRECT(com);
-        
+    else if (strcmp(com[0],"fg")==0)    
+        return FG(com);
+    else if (strcmp(com[0],"bg")==0)    
+        return BG(com);
     else if (strcmp(com[0],"setenv")==0)
         return SENV(com);
     else if (strcmp(com[0],"unsetenv")==0)

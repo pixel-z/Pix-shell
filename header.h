@@ -30,10 +30,14 @@ char lwd[1024]; //last working directory
 ll fore_pid;
 
 char **semicolon_tokenize();
+char **filter_token();
 char *actual_path(char *rel_path);
 char *relative_path(char *check);
 void prompt();
 char **filter_token(char *str);
 void CTRLZ(int sig);
+
+ll REDIRECT(char **com);
+ll execute(char **com, char *input_str);
 
 #endif
