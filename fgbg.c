@@ -18,7 +18,24 @@ ll FG(char **com)
             continue;
         if (c==jobnum)
         {
-            // bg_jobs[i] which is to be brought in foreground
+            ll shell_pid = getpid();
+
+            /* Ignore the signal */
+            signal(SIGTTOU, SIG_IGN);
+            signal(SIGTTIN, SIG_IGN);
+            tcsetpgrp(0,bg_jobs[i]); // setting foreground grp pid to bg_jobs[i]
+
+            kill(bg_jobs[i],SIGCONT); // continue if stopped
+            int status;
+            waitpid(bg_jobs[i], &status, WUNTRACED);
+
+            tcsetpgrp(0, getpgrp()); // resetting grp id
+
+            /* Default signal handler */
+            signal(SIGTTOU, SIG_DFL);
+            signal(SIGTTIN, SIG_DFL);
+
+            return 0;
         }
         c++;
     }
