@@ -100,7 +100,7 @@ int main()
     printf("\n**\033[1;33m Welcome to PiX shell \033[0m**\n\n");
     getcwd(newroot,sizeof(newroot));
 
-    strcpy(lwd,"~");
+    strcpy(lwd,"///");
 
     load_hist();
     while (1)

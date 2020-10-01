@@ -13,6 +13,8 @@ ll CD(char **com)
 
     if (strcmp(com[1],"-") == 0)
     {
+        if (strcmp(lwd,"///")==0) return -1;
+        
         printf("%s\n",lwd);
         
         if(chdir(actual_path(lwd))==-1)
