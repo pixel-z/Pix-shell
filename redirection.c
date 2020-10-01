@@ -36,7 +36,7 @@ ll REDIRECT(char **com)
     if ((idx1!=-1 && com[idx1]==NULL) || (idx2!=-1 && com[idx2]==NULL))
     {
         fprintf(stderr,"Redirection error\n");
-        return -1;
+        return 1;
     }
 
     char in[1024], out[1024];
@@ -53,7 +53,7 @@ ll REDIRECT(char **com)
         if (stat(in,&check)<0)
         {
             fprintf(stderr,"Input file error\n");
-            return -1;
+            return 1;
         }
         fd_in=open(in,O_RDONLY,0644);
         dup2(fd_in,0);
@@ -73,7 +73,7 @@ ll REDIRECT(char **com)
     if (pid<0)
     {
         perror("fork error");
-        return -1;
+        return 1;
     }
     if (pid==0)
     {

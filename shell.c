@@ -108,6 +108,11 @@ int main()
         signal(SIGCHLD,EXIT_STAT);
         signal(SIGTSTP, CTRLZ0);
         signal(SIGINT, CTRLC);
+        
+        if(err_code==0) printf("\033[1;30m:')\033[0m");
+        else if(err_code>0) printf("\033[1;30m:'(\033[0m");
+        err_code=-1;
+        
         prompt();
         no_commands=0;
 
@@ -137,7 +142,7 @@ int main()
             strcpy(tmp,commands[i]);
             
             com=filter_token(commands[i]);
-            execute(com,tmp);
+            err_code = execute(com,tmp);
         }
 
         hist_exit();

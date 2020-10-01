@@ -5,7 +5,7 @@ ll CD(char **com)
     if (com[1]== NULL)
     {
         fprintf(stderr,"No argument\n");
-        return -1;
+        return 1;
     }
     
     char cwd[1024];
@@ -25,7 +25,7 @@ ll CD(char **com)
     if (chdir(path) == -1)
     {
         perror("CD error");
-        return -1;
+        return 1;
     }
 
     strcpy(lwd,relative_path(cwd));

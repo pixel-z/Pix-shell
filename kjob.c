@@ -9,7 +9,7 @@ ll KJOB(char **com)
     if (len != 3)
     {
         perror("kjob: Incorrect no. of argument");
-        return -1;
+        return 1;
     }
 
     ll i=0;
@@ -18,7 +18,7 @@ ll KJOB(char **com)
         if (com[1][i]<'0' || com[1][i]>'9')
         {
             perror("kjob: Incorrect jobnumber");
-            return -1;
+            return 1;
         }
         i++;
     }
@@ -28,7 +28,7 @@ ll KJOB(char **com)
         if (com[2][i]<'0' && com[2][i]>'9')
         {
             perror("kjob: Incorrect signal no.");
-            return -1;
+            return 1;
         }
         i++;
     }
@@ -45,7 +45,7 @@ ll KJOB(char **com)
             if (kill(bg_jobs[i],signum)==-1)
             {
                 perror("kill() error");
-                return -1;
+                return 1;
             }
             break;
         }
@@ -54,7 +54,7 @@ ll KJOB(char **com)
     if (c!=jobnum)
     {
         printf("Invalid job number\n");
-        return -1;
+        return 1;
     }
 
     return 0;

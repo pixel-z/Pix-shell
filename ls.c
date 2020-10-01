@@ -1,5 +1,7 @@
 #include "header.h"
 
+ll tp=0; // exit code
+
 void print_permissions(struct stat s)
 {
     char perm[1024];
@@ -48,6 +50,7 @@ void ls_a(char **dir_address, ll n)
         if (directory == NULL)
         {
             printf("%s: No such file or directory\n",dir_address[i]);
+            tp=1;
             continue;
         }
         
@@ -72,6 +75,7 @@ void ls_l(char **dir_address, ll n)
         if (directory == NULL)
         {
             printf("%s: No such file or directory\n",dir_address[i]);
+            tp=1;
             continue;
         }
         printf("Contents:\n");
@@ -128,6 +132,7 @@ void ls_l_a(char **dir_address, ll n)
         if (directory == NULL)
         {
             printf("%s: No such file or directory\n",dir_address[i]);
+            tp=1;
             continue;
         }
         printf("Contents:\n");
@@ -177,7 +182,7 @@ ll LS(char **com)
 {
     ll l=0,a=0,flag=0;
     char **dir_address=(char **)malloc(sizeof(char *)*1024);
-
+    tp=0;
 
     ll i=1,j=0; // j = no of directories whose ls is to be performed
     while(com[i]!=NULL)
@@ -219,6 +224,7 @@ ll LS(char **com)
             if (directory == NULL)
             {
                 perror("dir error");
+                tp=1;
                 continue;
             }
             
@@ -236,5 +242,5 @@ ll LS(char **com)
         printf("\n");
     }
 
-    return 0;
+    return tp;
 }

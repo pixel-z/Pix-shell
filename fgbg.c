@@ -8,7 +8,7 @@ ll FG(char **com)
     if (len!=2)
     {
         fprintf(stderr,"Incorrect arguments\n");
-        return -1;
+        return 1;
     }
 
     ll jobnum = atoi(com[1]), c=1;
@@ -29,7 +29,7 @@ ll FG(char **com)
             int status;
             waitpid(bg_jobs[i], &status, WUNTRACED);
 
-            tcsetpgrp(0, getpgrp()); // resetting grp id
+            tcsetpgrp(0, getpgrp()); // resetting to grp pid of shell
 
             /* Default signal handler */
             signal(SIGTTOU, SIG_DFL);
@@ -43,7 +43,7 @@ ll FG(char **com)
     if (c!=jobnum)
     {
         fprintf(stderr,"Error: job no invalid\n");
-        return -1;
+        return 1;
     }
     
     return 0;
@@ -57,7 +57,7 @@ ll BG(char **com)
     if (len!=2)
     {
         fprintf(stderr,"Incorrect arguments\n");
-        return -1;
+        return 1;
     }
     
     ll jobnum = atoi(com[1]), c=1;
@@ -74,5 +74,5 @@ ll BG(char **com)
     }
     
     fprintf(stderr,"Error: Invalid Job number\n");
-    return -1;
+    return 1;
 }

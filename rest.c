@@ -5,7 +5,7 @@ ll flag=0;
 
 // we could not do it normally as execvp skips the below code therefore we need to fork 
 // Therefore child executes the command and parent(prompt) waits for its completion
-void foreground(char **com)
+ll foreground(char **com)
 {
     pid_t pid = fork();
     if (pid < 0)
@@ -27,10 +27,11 @@ void foreground(char **com)
         signal(SIGTSTP,CTRLZ);
         int status;
         waitpid(pid, &status, WUNTRACED);
+        return status;
     }
 }
 
-void background(char **com, ll len)
+ll background(char **com, ll len)
 {
     pid_t pid = fork();
     
@@ -60,6 +61,7 @@ void background(char **com, ll len)
             exit(EXIT_FAILURE);
         }
     }
+    return 0;
 }
 
 ll REST(char**com)
@@ -77,7 +79,7 @@ ll REST(char**com)
 
     // no background process
     if (bg==0)
-        foreground(com);
+        return foreground(com);
     else
-        background(com,len);
+        return background(com,len);
 }

@@ -16,7 +16,7 @@ ll PINFO(char **com)
     {
         fprintf(stderr,"Process with given pid %lld not found\n",pid);
         free(status_path);
-        return -1;
+        return 1;
     }
 
     char status[2048], memory[2048], path[2048];
@@ -48,16 +48,20 @@ ll PINFO(char **com)
     ll ret = readlink(exe_path, exec, 1024);
 
     if (ret < 0)
+    {
         perror("readlink failed");
+        fclose(fp);
+        free(status_path);
+        return 1;
+    }
     else
     {
         exec[ret]='\0';
         char *rel_exec = relative_path(exec);
         printf("Executable path -- %s\n",rel_exec);
+
+        fclose(fp);
+        free(status_path);
+        return 0;
     }
-
-    fclose(fp);
-    free(status_path);
-
-    return 0;
 }  

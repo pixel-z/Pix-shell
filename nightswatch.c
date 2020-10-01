@@ -10,12 +10,12 @@ ll NIGHTSWATCH(char **com)
     if (len!=4)
     {
         printf("Error: Give input as `nightswatch -n [seconds] [interrupt]`\n");
-        return -1;
+        return 1;
     }
     if (strcmp(com[1],"-n")!=0 || strcmp(com[3], "interrupt")!=0)
     {
         printf("Input error\n"); 
-        return -1;
+        return 1;
     }
 
     FILE *fp0 = fopen("/proc/interrupts","r");
@@ -23,7 +23,7 @@ ll NIGHTSWATCH(char **com)
     if (fp0==NULL)
     {
         fprintf(stderr,"Could not open /proc/interrupts\n");
-        return -1;
+        return 1;
     }
 
     fgets(one,sizeof(one),fp0);
@@ -55,7 +55,7 @@ ll NIGHTSWATCH(char **com)
             if (fgets(line,sizeof(line),fp)==NULL)
             {
                 printf("Error in reading file\n");
-                return -1;
+                return 1;
             }
             
             char c[6];

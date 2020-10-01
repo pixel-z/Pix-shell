@@ -71,3 +71,8 @@
 2. No. of background processes should be less than 1000.
 3. Running background processes and then exiting thorough `Ctrl+C` will give error (Ctrl+C handling is not implemented).
 4. Process exit status (E.g: process exited normally) is printed after next prompt.
+
+## NOTE
+- Functions returns:
+    - `=0` value if successful
+    - `>0` value if error occurs

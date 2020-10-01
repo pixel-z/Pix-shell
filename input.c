@@ -46,7 +46,7 @@ ll execute(char **com, char *input_str)
     }
 
     if (com[0]==NULL)
-        return 0;
+        return -1;
     else if (pipe==1)
         return PIPING(input_str);
     else if (redirect==1)

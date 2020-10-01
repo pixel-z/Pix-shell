@@ -35,14 +35,14 @@ ll PIPING(char *input_str)
         if(pipe(fd)==-1)
         {
             perror("pipe");
-            return -1;
+            return 1;
         }
         
         pid_t pid = fork();
         if (pid == -1)
         {
             perror("Forking error");
-            return -1;
+            return 1;
         }
 
         else if (pid == 0)

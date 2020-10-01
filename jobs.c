@@ -2,7 +2,7 @@
 
 ll JOBS(char **com)
 {
-    ll num=1;
+    ll num=1, ret=0;
     for (ll i = 0; i < 1024; i++)
     {
         if (bg_jobs[i]==-1)
@@ -13,8 +13,10 @@ ll JOBS(char **com)
         sprintf(status_path,"/proc/%lld/status",bg_jobs[i]);
 
         FILE *fp = fopen(status_path, "r");
-        if (fp==NULL)
+        if (fp==NULL){
             perror("JOBS error");
+            ret=1;
+        }
         else
         {
             char line[1024];
@@ -51,5 +53,5 @@ ll JOBS(char **com)
 
         free(status_path);
     }
-    return 0;
+    return ret;
 }

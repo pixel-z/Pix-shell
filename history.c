@@ -60,7 +60,7 @@ ll HISTORY(char **com)
     if (com[2]!=NULL)
     {
         printf("Incorrect no. of arguments\n");
-        return 0;
+        return 1;
     }
     
     if (com[1]==NULL)
@@ -78,7 +78,7 @@ ll HISTORY(char **com)
         if (num>hist_cnt)
         {
             fprintf(stderr,"Wrong argument\n");
-            return -1;
+            return 1;
         }
         for (ll i = hist_cnt-num+1; i <= hist_cnt; i++)
         {
@@ -88,10 +88,9 @@ ll HISTORY(char **com)
     else
     {
         fprintf(stderr,"Error: No.should be < 20\n");
-        return -1;
+        return 1;
     }
     
-
     return 0;
 }
 
