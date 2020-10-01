@@ -13,7 +13,7 @@ ll CD(char **com)
 
     if (strcmp(com[1],"-") == 0)
     {
-        if (strcmp(lwd,"///")==0) return -1;
+        if (strcmp(lwd,"///")==0) return 0;
         
         printf("%s\n",lwd);
         

@@ -28,6 +28,8 @@ ll PIPING(char *input_str)
     }
     tokens[num] = NULL;
 
+    ll ret=0;
+    int pp[2]; pipe(pp);
     for (ll i = 0; i < num; i++)
     {
         char **com = filter_token(tokens[i]);
@@ -53,22 +55,28 @@ ll PIPING(char *input_str)
                 dup2(fd[1],1);
             
             close(fd[0]);
+            close(pp[0]);
 
             if (check_redir(tokens[i])==1)
-                REDIRECT(filter_token(tokens[i]));
+                ret=REDIRECT(filter_token(tokens[i]));
             else
-                execute(com,NULL); // NULL because 2nd parameter is for piping, command cannot contain pipe therefore NULL 
+                ret=execute(com,NULL); // NULL because 2nd parameter is for piping, command cannot contain pipe therefore NULL 
 
+            write(pp[1],&ret,sizeof(ret));
+            close(pp[1]);
             exit(1); // exits child process
         }
         else 
         {
             wait(NULL);
             close(fd[1]);
+            close(pp[1]);
+            read(pp[0],&ret,sizeof(ret));
             in=fd[0];
+            close(pp[0]);
         }
 
     }
     free(tokens);
-    return 0;
+    return ret;
 }

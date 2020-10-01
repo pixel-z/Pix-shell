@@ -1,8 +1,5 @@
 #include "header.h"
 
-pid_t foreground_pid;
-ll flag=0;
-
 // we could not do it normally as execvp skips the below code therefore we need to fork 
 // Therefore child executes the command and parent(prompt) waits for its completion
 ll foreground(char **com)
