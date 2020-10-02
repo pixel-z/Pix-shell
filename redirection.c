@@ -69,6 +69,8 @@ ll REDIRECT(char **com)
         dup2(fd_out,1);
     }
     
+    int pp[2]; pipe(pp); // for info child->par for exitcode
+    ll ret=0;
     pid_t pid=fork();
     if (pid<0)
     {
@@ -77,18 +79,30 @@ ll REDIRECT(char **com)
     }
     if (pid==0)
     {
-        if (execvp(com[0], com) < 0)
-        {
-            fprintf(stderr,"Execvp: Command not found\n");
-            exit(EXIT_FAILURE);
-        }
+        // if (execvp(com[0], com) < 0)
+        // {
+        //     fprintf(stderr,"Execvp: Command not found\n");
+        //     ret=1;
+        //     close(pp[0]);
+        //     write(pp[1],&ret,sizeof(ret));
+        //     close(pp[1]);
+        //     exit(EXIT_FAILURE);
+        // }
+        close(pp[0]);
+        ret = execute(com,NULL);
+        write(pp[1],&ret,sizeof(ret));
+        close(pp[1]);
+        exit(1);
     }
     else
     {
         wait(NULL);
         dup2(fd_stdin,0);
         dup2(fd_stdout,1);
+        read(pp[0],&ret,sizeof(ret));
+        close(pp[1]);
+        close(pp[0]);
     }
 
-    return 0;
+    return ret;
 }

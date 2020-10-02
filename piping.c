@@ -29,7 +29,7 @@ ll PIPING(char *input_str)
     tokens[num] = NULL;
 
     ll ret=0;
-    int pp[2]; pipe(pp);
+    int pp[2]; pipe(pp); // to give exit code from child->parent (variable are not shared)
     for (ll i = 0; i < num; i++)
     {
         char **com = filter_token(tokens[i]);
