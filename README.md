@@ -79,3 +79,4 @@
 
 ## Features
 - `CtrlD` exits the shell.
+- `cd -` prints relative last working directory.
