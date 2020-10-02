@@ -18,11 +18,11 @@ ll FG(char **com)
             continue;
         if (c==jobnum)
         {
+            fore_pid = bg_jobs[i];
             ll shell_pid = getpid();
 
             /* Ignore the signal */
-            signal(SIGTTOU, SIG_IGN);
-            signal(SIGTTIN, SIG_IGN);
+            signal(SIGTTOU, SIG_IGN); signal(SIGTTIN, SIG_IGN);
             tcsetpgrp(0,bg_jobs[i]); // setting foreground grp pid to bg_jobs[i]
 
             kill(bg_jobs[i],SIGCONT); // continue if stopped
@@ -32,8 +32,15 @@ ll FG(char **com)
             tcsetpgrp(0, getpgrp()); // resetting to grp pid of shell
 
             /* Default signal handler */
-            signal(SIGTTOU, SIG_DFL);
-            signal(SIGTTIN, SIG_DFL);
+            signal(SIGTTOU, SIG_DFL); signal(SIGTTIN, SIG_DFL);
+
+            /* If we get CTRLZ */
+            if (WIFSTOPPED(status))
+            {
+                printf("\n\033[1;31mStopped: [%lld]\033[0m\n",fore_pid);
+                // bg_jobs[bg_cnt]=bg_jobs[i];
+                // bg_cnt++;
+            }
 
             return 0;
         }

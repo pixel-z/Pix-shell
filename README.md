@@ -73,6 +73,9 @@
 4. Process exit status (E.g: process exited normally) is printed after next prompt.
 
 ## NOTE
-- Functions returns:
+- All functions returns:
     - `=0` value if successful
     - `>0` value if error occurs
+
+## Features
+- `CtrlD` exits the shell.

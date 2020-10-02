@@ -12,6 +12,7 @@ ll foreground(char **com)
     }
     else if (pid==0)
     {
+        setpgid(0,0);
         if (execvp(com[0], com) < 0)
         {
             perror("Command invalid");
@@ -20,10 +21,28 @@ ll foreground(char **com)
     }
     else
     {
+        pid_t shell_gpid = getpgrp();
         fore_pid = pid;
-        signal(SIGTSTP,CTRLZ);
+        // signal(SIGTSTP,CTRLZ);
+
+        /* ignore background read/write */
+        signal(SIGTTIN, SIG_IGN);signal(SIGTTOU, SIG_IGN); 
+        tcsetpgrp(STDIN_FILENO,pid);
         int status;
         waitpid(pid, &status, WUNTRACED);
+        tcsetpgrp(STDIN_FILENO,shell_gpid);
+        /* reset signals (return to dfl = default) */
+        signal(SIGTTIN, SIG_DFL);signal(SIGTTOU, SIG_DFL); 
+
+        /* if we get ctrlz signal */
+        if (WIFSTOPPED(status))
+        {
+            printf("\n\033[1;31mStopped: [%lld]\033[0m\n",fore_pid);
+            bg_jobs[bg_cnt]=fore_pid;
+            bg_cnt++;
+            // fore_pid=-1;
+        }
+        
         return status;
     }
 }
