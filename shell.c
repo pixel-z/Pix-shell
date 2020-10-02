@@ -138,11 +138,12 @@ int main()
         // included in input.c
         for (ll i = 0; i < no_commands; i++)
         {
-            char **com, *tmp;
+            char **com, *tmp=malloc(1024*sizeof(char));
             strcpy(tmp,commands[i]);
             
             com=filter_token(commands[i]);
             err_code = execute(com,tmp);
+            free(tmp);
         }
 
         hist_exit();
